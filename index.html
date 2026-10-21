@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Simulator 99.game</title>
+    <meta name="description" content="Pet Simulator 99 Gems Arena — coin flips, blackjack, chat, leaderboard, tips, and admin tools." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="brand-mark">PS99</div>
+        <div>
+          <div class="brand-name">Pet Simulator 99.game</div>
+          <div class="brand-sub">Gems Arena</div>
+        </div>
+      </div>
+
+      <nav class="topnav">
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#chat">Chat</a>
+        <a href="#admin">Admin</a>
+      </nav>
+
+      <button id="linkRobloxBtn" class="button button-primary small">Roblox sign in</button>
+    </header>
+
+    <main class="container" id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Pet Simulator 99 inspired</span>
+          <h1>Win gems, flip coins, and outplay the house.</h1>
+          <p>
+            A fan-made gems economy where players can gamble, tip friends, chat live,
+            and climb the leaderboard in a custom Pet Simulator 99-style arena.
+          </p>
+
+          <div class="hero-actions">
+            <button id="quickLoginBtn" class="button button-primary">Connect Roblox account</button>
+            <button class="button button-secondary">View leaderboard</button>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-card">
+              <span class="stat-label">Active players</span>
+              <strong id="activePlayers">12,480</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Current pot</span>
+              <strong>1.2M gems</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Top streak</span>
+              <strong>99 wins</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel card">
+          <div class="panel-header">
+            <span class="dot green"></span>
+            <span>Login to play</span>
+          </div>
+
+          <div id="authPanel" class="auth-panel">
+            <label for="usernameInput">Roblox username</label>
+            <input id="usernameInput" type="text" placeholder="Enter username" />
+
+            <label for="codeInput">Bio code</label>
+            <div class="inline-input">
+              <input id="codeInput" type="text" placeholder="Paste bio code here" />
+              <button id="copyBioCodeBtn" class="button button-secondary small">Copy</button>
+            </div>
+
+            <button id="loginBtn" class="button button-primary wide">Login</button>
+            <button id="robloxLoginBtn" class="button button-muted wide">Roblox sign in</button>
+          </div>
+
+          <div id="profilePanel" class="profile-panel hidden">
+            <div class="profile-top">
+              <div class="avatar-circle" id="avatarUsername">U</div>
+              <div>
+                <div class="profile-name" id="profileName">Guest</div>
+                <div class="profile-tag">Verified Roblox player</div>
+              </div>
+            </div>
+
+            <div class="profile-code-box">
+              <span>Signed bio code</span>
+              <strong id="bioCodeDisplay">killer000000</strong>
+            </div>
+
+            <div class="profile-stats">
+              <div>
+                <span>Gems</span>
+                <strong id="gemsValue">0</strong>
+              </div>
+              <div>
+                <span>Wins</span>
+                <strong id="winsValue">0</strong>
+              </div>
+              <div>
+                <span>Losses</span>
+                <strong id="lossesValue">0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard">
+        <div class="main-column">
+          <div class="card section-card" id="games">
+            <div class="section-header">
+              <h2>Game lobby</h2>
+              <span class="status-pill">Live</span>
+            </div>
+
+            <div class="game-grid">
+              <article class="mini-game coin-flip-card">
+                <div class="game-header">
+                  <h3>Coin flip</h3>
+                  <span>2x</span>
+                </div>
+                <div class="bet-controls">
+                  <label>
+                    Gems
+                    <input id="coinBet" type="number" min="10" value="50" />
+                  </label>
+                  <div class="choice-pills">
+                    <button class="choice active" data-choice="heads">Heads</button>
+                    <button class="choice" data-choice="tails">Tails</button>
+                  </div>
+                </div>
+                <button id="flipBtn" class="button button-primary wide">Flip coin</button>
+              </article>
+
+              <article class="mini-game blackjack-card">
+                <div class="game-header">
+                  <h3>Blackjack</h3>
+                  <span>House</span>
+                </div>
+                <div class="blackjack-score">
+                  <div>
+                    <span>House</span>
+                    <strong id="houseScore">0</strong>
+                  </div>
+                  <div>
+                    <span>You</span>
+                    <strong id="playerScore">0</strong>
+                  </div>
+                </div>
+                <div class="bet-controls small-gap">
+                  <label>
+                    Bet gems
+                    <input id="blackjackBet" type="number" min="25" value="100" />
+                  </label>
+                </div>
+                <div class="action-row">
+                  <button id="dealBtn" class="button button-primary">Deal</button>
+                  <button id="hitBtn" class="button button-secondary">Hit</button>
+                  <button id="standBtn" class="button button-secondary">Stand</button>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="card section-card" id="chat">
+            <div class="section-header">
+              <h2>Player chat</h2>
+              <span class="status-pill">Online</span>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+              <div class="chat-message"><span class="user">SkyForge</span> <span>Just won a coin flip! Nice run.</span></div>
+              <div class="chat-message"><span class="user">PawMaster</span> <span>Anyone up for blackjack?</span></div>
+              <div class="chat-message"><span class="user">GemHunter</span> <span>I tipped 200 gems to my friend in the guild.</span></div>
+            </div>
+
+            <div class="chat-form">
+              <input id="chatInput" type="text" maxlength="140" placeholder="Type a message..." />
+              <button id="sendChatBtn" class="button button-primary">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="card section-card" id="leaderboard">
+            <div class="section-header">
+              <h2>Leaderboard</h2>
+              <span class="status-pill">Top 10</span>
+            </div>
+
+            <ol class="leaderboard-list" id="leaderboardList">
+              <li><span>#1</span> <strong>PixelPaws</strong> <em>640,000</em></li>
+              <li><span>#2</span> <strong>GemTycoon</strong> <em>520,300</em></li>
+              <li><span>#3</span> <strong>LuckyFox</strong> <em>488,900</em></li>
+              <li><span>#4</span> <strong>VelvetCorgi</strong> <em>446,200</em></li>
+              <li><span>#5</span> <strong>SkyForge</strong> <em>430,500</em></li>
+              <li><span>#6</span> <strong>GoldPaws</strong> <em>399,100</em></li>
+              <li><span>#7</span> <strong>CryptoCat</strong> <em>372,400</em></li>
+              <li><span>#8</span> <strong>RoboRanger</strong> <em>341,700</em></li>
+              <li><span>#9</span> <strong>MoonWolf</strong> <em>316,000</em></li>
+              <li><span>#10</span> <strong>PetKing</strong> <em>294,000</em></li>
+            </ol>
+          </div>
+
+          <div class="card section-card" id="tips">
+            <div class="section-header">
+              <h2>Tip gems</h2>
+            </div>
+
+            <label>
+              Friend username
+              <input id="tipUser" type="text" placeholder="Who are you tipping?" />
+            </label>
+
+            <label>
+              Amount
+              <input id="tipAmount" type="number" min="1" value="100" />
+            </label>
+
+            <button id="tipBtn" class="button button-primary wide">Send tip</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="card admin-section" id="admin">
+        <div class="section-header">
+          <h2>Admin panel</h2>
+          <span class="status-pill danger">Restricted</span>
+        </div>
+
+        <div class="admin-lock">
+          <label>
+            Access key
+            <input id="adminKeyInput" type="password" placeholder="Enter admin key" />
+          </label>
+          <button id="unlockAdminBtn" class="button button-primary">Unlock</button>
+        </div>
+
+        <div id="adminPanel" class="admin-panel hidden">
+          <div class="admin-grid">
+            <div class="admin-card">
+              <h3>Ban / unban</h3>
+              <input id="banUserInput" type="text" placeholder="Username" />
+              <div class="action-row compact">
+                <button id="banBtn" class="button button-danger">Ban</button>
+                <button id="unbanBtn" class="button button-muted">Unban</button>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <h3>Give gems</h3>
+              <input id="grantUserInput" type="text" placeholder="Username" />
+              <input id="grantAmountInput" type="number" min="1" value="250" />
+              <div class="action-row compact">
+                <button id="grantSelfBtn" class="button button-primary">Give self</button>
+                <button id="grantPlayerBtn" class="button button-secondary">Give user</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
